@@ -1,11 +1,21 @@
 from __future__ import print_function
 import random
 import copy
+import argparse
 
-mutation_rate = 0.01
-crossover_rate = 0.5
-population = 1000
-board_size = 50
+parser = argparse.ArgumentParser()
+parser.add_argument("--mutate", help="mutation rate",default=0.01,type=float)
+parser.add_argument("--cross", help="crossover rate",default=0.5,type=float)
+parser.add_argument("--pop", help="initial population",default=100,type=int)
+parser.add_argument("--n", help="board size",default=8,type=int)
+parser.add_argument("--iter", help="number of iterations",default=200,type=int)
+
+args = parser.parse_args()
+mutation_rate = args.mutate
+crossover_rate = args.cross
+population = args.pop
+board_size = args.n
+max_iter = args.iter
 
 boards = []
 
@@ -101,6 +111,6 @@ while True:
         	boards.append(crossover_results[1])
     print(len(boards))
     generation += 1
-    if(generation>200):	
+    if(generation>max_iter):	
     	break
 
