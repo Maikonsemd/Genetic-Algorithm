@@ -4,8 +4,8 @@ import copy
 
 mutation_rate = 0.01
 crossover_rate = 0.5
-population = 100
-board_size = 8
+population = 1000
+board_size = 50
 
 boards = []
 
@@ -27,10 +27,6 @@ def fitness(board):
 				if (board[i] == board[j]) or (abs(board[i] - board[j]) == abs(i-j)):
 					isSafe = False
 					break
-			if i==j:
-				if(board.count(board[i])>1):
-					isSafe = False
-					break
 		if(isSafe==True):
 			fitness += 1
 	return fitness
@@ -44,7 +40,6 @@ def mutation(board):
 	t = newBoard[index]
 	newBoard[index] = newBoard[index+1]
 	newBoard[index+1] = t
-	#newBoard[index],newBoard[index+1] = newBoard[index+1],newBoard[index]
 	return newBoard
 
 def crossover(board1,board2):
@@ -71,10 +66,7 @@ def printBoard(chromosome):
 		print()
 init()
 
-bestScore = 0
 generation = 1
-
-print(crossover([1,2,3,4,5,6,7,8],[8,7,6,5,4,3,2,1]))
 
 # run genetic algorithm
 while True:
@@ -112,10 +104,3 @@ while True:
     if(generation>200):	
     	break
 
-
-
-'''
-for board in boards:
-	print(board)
-	print(fitness(board))
-'''
